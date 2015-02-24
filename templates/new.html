@@ -1,0 +1,22 @@
+ 
+<div class="project-form">
+    <h1>New Project</h1>
+    <div class="col-md-12">
+    
+        	<div class="row">
+                <form>
+                    <fieldset>
+                            <input ng-model="projectlist.project.title" type="text" id="title" name="name" class="col-md-12" placeholder="Title">
+                
+                            <textarea ng-model="projectlist.project.description" rows="3" id="description" name="description" class="col-md-12" placeholder="Description"></textarea>
+
+             
+                            <input type="hidden" name="Language" ng-model="projectlist.project.total_hours" ng-init="projectlist.project.total_hours='0'" value="0" >
+                            <input type="hidden" name="Language" ng-model="projectlist.project.total_tasks" ng-init="projectlist.project.total_tasks='0'" value="0" >
+                            <input type="hidden" name="Language" ng-model="projectlist.project.img_url" ng-init="projectlist.project.img_url='img/s1.png'" value="img/s1.png" >
+                            <button ng-click="projectlist.addProject()" type="submit" class="btn">Submit</button>
+                    </fieldset>
+                </form>
+	</div>
+    </div>
+</div>

@@ -1,0 +1,68 @@
+
+
+<div id="shotsByPlayerId" ng-controller="ProjectListController as projectlist"> 
+            
+                                
+    <li class="project-item" ng-repeat="project in projectlist.projects" id="pid-{{project.pid}}" ng-click="projectlist.showDetails(project.pid)" ng-class="{open: projectlist.showdetails  == project.pid}">
+        
+        
+     <div class="project-header" ng-class="{'col-md-4': projectlist.showdetails == project.pid}">   
+        <img ng-src="{{project.img_url}}">
+        <h3>{{project.title}}</h3>
+
+        <p class="desc">{{project.description}}</p>
+
+        <div class="total_hours"<span class="icon-heart"></span>{{project.total_hours}}<spans class="small">h</spans></div>
+
+        <div class="total_tasks"><span class="icon-bubbles"></span>
+        {{project.total_tasks}}  </div>
+    </div>
+
+    <div class="project-details col-md-8" ng-if="projectlist.showdetails == project.pid">
+            <section ng-controller="PanelController as panel"> 
+                <ul class="nav nav-pills">
+                    <div class="tabs" ng-click="panel.selectTab(1)" ng-class="{active: panel.isSelected(1)}"> Main Tasks</div>
+                     <div ng-click="panel.selectTab(2)" class="tabs" ng-class="{active: panel.isSelected(2)}">To do List</div>
+                </ul>
+                
+                <div class="panel" ng-show="panel.isSelected(1)">
+                    <h4> Main Tasks </h4>    
+                    <div class="todolist" ng-repeat="task in project.tasks">
+                        <div class="col-md-10">{{task.text}}</div>
+                        <div class="col-md-1">{{task.time}}<small>h</small></div>
+                         <div class="col-md-1"><span ng-class="{icon-check: task.done}"></span></div>
+                      
+                    </div>
+                    
+                </div>
+                <div class="panel todos" ng-show="panel.isSelected(2)">
+                    <h4> To do tasks</h4>
+                    <div class="todolist" ng-repeat="todo in project.todos">
+                          <input type="checkbox" ng-model="todo.done">
+                          <span class="done-{{todo.done}}">{{todo.text}}</span>
+                      
+                    </div>
+                      <form ng-submit="addTodo()">
+                        <input type="text" ng-model="todoText"  size="30"
+                               placeholder="add new todo here">
+                        <input class="btn-primary" type="submit" value="add">
+                      </form>
+                </div>
+                
+            </section>
+    </div>
+
+
+    </li> 
+
+
+
+
+     <li class="project-item add"  >
+            
+        <a class="btnicon" ng-click="projectlist.showAddForm()" ><span class="icon-plus"></span><h3>Add Project</h3> </a>  
+         <div ng-if="projectlist.bshowAddForm" ng-include="'templates/new.html'"></div>
+
+    </li> 
+    
+</div>
